@@ -27,17 +27,18 @@ function gracefulShutdown(signal: string) {
   server.close((err) => {
     if (err) {
       logger.error({ err }, "Error during server close");
-      process.exit(1);
+      process.exitCode = 1;
+      return;
     }
 
     logger.info("HTTP server closed. Exiting process.");
-    process.exit(0);
+    process.exitCode = 0;
   });
 
   setTimeout(() => {
     logger.error("Forcing shutdown after timeout");
     process.exit(1);
-  }, 10_000).unref();
+  }, 10000).unref();
 }
 
 process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
