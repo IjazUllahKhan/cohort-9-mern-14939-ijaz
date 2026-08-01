@@ -8,6 +8,11 @@ const server = app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
 });
 
+server.on("error", (err) => {
+  logger.error({ err }, "Failed to start server");
+  process.exit(1);
+});
+
 let isShuttingDown = false;
 
 function gracefulShutdown(signal) {
