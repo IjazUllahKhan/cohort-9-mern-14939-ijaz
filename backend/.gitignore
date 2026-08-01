@@ -4,5 +4,5 @@ node_modules
 .env.production
 .env.test
 !.env.example
-
 /src/generated/prisma
+dist

@@ -1,6 +1,6 @@
-const app = require("./app");
-require("dotenv").config();
-const logger = require("./config/logger");
+import app from "./app";
+import "dotenv/config";
+import logger from "./config/logger";
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,7 +15,7 @@ server.on("error", (err) => {
 
 let isShuttingDown = false;
 
-function gracefulShutdown(signal) {
+function gracefulShutdown(signal: string) {
   if (isShuttingDown) {
     logger.info(`${signal} received: shutdown already in progress`);
     return;
