@@ -1,9 +1,9 @@
-import { RequestHandler, Request, Response } from "express";
+import { RequestHandler, Request, Response, NextFunction } from "express";
 
 const responseMiddleware: RequestHandler = (
   _req: Request,
   res: Response,
-  next: Function,
+  next: NextFunction,
 ) => {
   res.success = (data: unknown) => {
     res.status(200).json({ status: "success", data });
