@@ -3,11 +3,11 @@ import logger from "../utils/logger";
 
 const loggerMiddleware: RequestHandler = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction,
 ) => {
   logger.info(
-    { method: req.method, url: req.url, body: req.body },
+    { method: req.method, url: req.url },
     "Incoming request",
   );
   next();

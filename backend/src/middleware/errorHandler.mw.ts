@@ -3,7 +3,7 @@ import logger from "../utils/logger";
 import { AppError } from "../utils/error";
 
 export const errorHandlerMiddleware = (
-  err: any,
+  err: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction,
@@ -18,8 +18,10 @@ export const errorHandlerMiddleware = (
     details = err.details;
     logger.warn({ statusCode, message, details }, "Client Request Warning");
   } else {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    const errorStack = err instanceof Error ? err.stack : undefined;
     logger.error(
-      { error: err.message, stack: err.stack },
+      { error: errorMessage, stack: errorStack },
       "Unhandled Server Exception",
     );
   }
