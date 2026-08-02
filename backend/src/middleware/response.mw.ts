@@ -6,10 +6,10 @@ const responseMiddleware: RequestHandler = (
   next: NextFunction,
 ) => {
   res.success = (data: unknown) => {
-    res.status(200).json({ status: "success", data });
+    res.status(200).json(data);
   };
   res.sendResponse = (statusCode: number, data: unknown) => {
-    res.status(statusCode).json({ status: statusCode, data });
+    res.status(statusCode).json(data);
   };
   next();
 };

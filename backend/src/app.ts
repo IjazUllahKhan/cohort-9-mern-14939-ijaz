@@ -4,6 +4,8 @@ import helmet from "helmet";
 import router from "./routes/index";
 import responseMiddleware from "./middleware/response.mw";
 import loggerMiddleware from "./middleware/logger.mw";
+import { errorHandlerMiddleware } from "./middleware/errorHandler.mw";
+import { AppError } from "./utils/error";
 
 const app = express();
 
@@ -14,5 +16,10 @@ app.use(express.json());
 app.use(loggerMiddleware);
 
 app.use("/api", router);
+
+app.use((req, res, next) => {
+  next(new AppError(404, `Route ${req.method} ${req.path} not found`));
+});
+app.use(errorHandlerMiddleware);
 
 export default app;
