@@ -1,8 +1,11 @@
 import { Request, Response } from "express";
+import { registerUser } from "../services/user.service";
+
 export const register = async (req: Request, res: Response) => {
-  try {
-    const { username, email, password } = req.body;
-    const user = { username, email, password };
-    return res.sendResponse(201, user);
-  } catch (err) {}
+  const newUser = await registerUser(req.body);
+  return res.sendResponse(201, {
+    success: true,
+    message: "User Created successfully",
+    data: newUser,
+  });
 };

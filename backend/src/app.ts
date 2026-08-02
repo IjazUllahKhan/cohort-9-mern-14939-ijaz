@@ -17,7 +17,7 @@ app.use(loggerMiddleware);
 
 app.use("/api", router);
 
-app.use((req, res, next) => {
+app.use((req, _res, next) => {
   next(new AppError(404, `Route ${req.method} ${req.path} not found`));
 });
 app.use(errorHandlerMiddleware);
